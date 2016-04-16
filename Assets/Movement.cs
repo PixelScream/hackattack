@@ -6,7 +6,7 @@ public class Movement : MonoBehaviour {
     public float moveAccel=20f;
     public Vector3 windDirection = new Vector3(0,0,0);
     public float windSpeed = 0f;
-    private float forwardSpeed = 1f;
+    private float forwardSpeed = 3f;
     public float levelWidth, levelHeight;
 
     private Vector3 airInput;
@@ -19,7 +19,7 @@ public class Movement : MonoBehaviour {
 
 	// Use this for initialization
 	void Start () {
-        transform.position = new Vector3(0, levelHeight/2, 0);
+        transform.position = new Vector3(0, 5, 0);
         transform.eulerAngles = new Vector3(0, 0, 0);
 	}
 	
