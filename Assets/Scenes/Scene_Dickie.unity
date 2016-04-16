@@ -273,11 +273,11 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 22478628, guid: a4b5b6365c9defe458f2acb2598a34fd, type: 2}
       propertyPath: m_AnchorMax.x
-      value: 0.5
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 22478628, guid: a4b5b6365c9defe458f2acb2598a34fd, type: 2}
       propertyPath: m_AnchorMax.y
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: a4b5b6365c9defe458f2acb2598a34fd, type: 2}
@@ -428,6 +428,10 @@ Prefab:
       propertyPath: powerSlider
       value: 
       objectReference: {fileID: 1779601337}
+    - target: {fileID: 11430658, guid: 45db8c6ef0c2d8a419c2f7d4c02396e7, type: 2}
+      propertyPath: blowDuration
+      value: 2
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 45db8c6ef0c2d8a419c2f7d4c02396e7, type: 2}
   m_IsPrefabParent: 0
