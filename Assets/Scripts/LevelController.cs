@@ -8,7 +8,7 @@ public class LevelController : MonoBehaviour {
     LevelInfo defaultLevelInfo;
     public float ringDistance = 5;
     public float levelWidth, levelHeight;
-
+    GameObject[] rings;
 
     public struct LevelInfo
     {
@@ -28,15 +28,35 @@ public class LevelController : MonoBehaviour {
         BuildLevel(defaultLevelInfo);
 	}
 
+    void Update()
+    {
+        if (Input.GetMouseButtonDown(0))
+        {
+            BuildLevel(defaultLevelInfo);
+        }
+    }
 
     public void BuildLevel(LevelInfo l)
     {
+        // check for rings being in existance
+        if(rings == null)
+        {
+            Debug.Log("Making Rings");
+            rings = new GameObject[l.ringCount];
+            for (int i = 0; i < l.ringCount; i++)
+            {
+                rings[i] = Instantiate(ring, Vector3.zero, Quaternion.identity) as GameObject;
+                rings[i].transform.parent = this.transform;
+            }
+        }
+
+        Debug.Log("Placing Rings");
         for (int i = 0; i < l.ringCount; i++)
         {
             Vector3 offset = new Vector3(Random.value * levelWidth, Random.value * levelHeight);
-            GameObject g = Instantiate(ring, Vector3.forward * ringDistance * i + offset, Quaternion.identity) as GameObject;
-            g.transform.localScale = Vector3.one * l.ringSize[i];
-            g.transform.parent = this.transform;
+            rings[i].transform.position = Vector3.forward * ringDistance * i + offset;
+            rings[i].transform.localScale = Vector3.one * l.ringSize[i];
+
         }
     }
 }
