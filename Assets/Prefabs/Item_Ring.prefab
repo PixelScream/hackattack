@@ -69,8 +69,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 49b2e4df490c46e43b946e009c072206, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  spinTime: 0.5
-  spinSpeed: 30
+  spinTime: 2
+  spinSpeed: 500
 --- !u!135 &13569730
 SphereCollider:
   m_ObjectHideFlags: 1
