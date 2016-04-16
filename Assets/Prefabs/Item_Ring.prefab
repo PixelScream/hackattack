@@ -70,7 +70,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   spinTime: 2
-  spinSpeed: 500
+  spinSpeed: 1000
 --- !u!135 &13569730
 SphereCollider:
   m_ObjectHideFlags: 1

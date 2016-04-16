@@ -34,6 +34,8 @@ public class LevelController : MonoBehaviour {
         {
             BuildLevel(defaultLevelInfo);
         }
+
+
     }
 
     public void BuildLevel(LevelInfo l)
