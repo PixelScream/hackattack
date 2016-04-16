@@ -1,4 +1,5 @@
 ﻿using UnityEngine;
+using UnityEngine.UI;
 using System.Collections;
 
 public class Movement : MonoBehaviour {
@@ -8,6 +9,9 @@ public class Movement : MonoBehaviour {
     public float windSpeed = 0f;
     private float forwardSpeed = 3f;
     public float levelWidth, levelHeight;
+
+    public Text scoreText;
+    public float score=0f;
 
     private Vector3 airInput;
     private Vector3 direction;
@@ -21,6 +25,7 @@ public class Movement : MonoBehaviour {
 	void Start () {
         transform.position = new Vector3(0, 5, 0);
         transform.eulerAngles = new Vector3(0, 0, 0);
+        scoreText.text = "Score: " + score.ToString();
 	}
 	
 	// Update is called once per frame
@@ -47,6 +52,15 @@ public class Movement : MonoBehaviour {
 
 
     }
+    /*
+    void OnCollisionEnter(Collision col)
+    {
+        if (col.gameObject.name == "Item_Ring")
+        {
+            Debug.Log("Collide");
+        }
+    }
+    */
 }
 /*
 
