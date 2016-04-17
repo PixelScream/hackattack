@@ -71,7 +71,10 @@ public class LevelController : MonoBehaviour {
 
     public void PlaceRing(GameObject r, int i)
     {
+        print(i);
         Vector3 offset = new Vector3(Random.value * levelWidth, Random.value * levelHeight, 15);
-        r.transform.position = Vector3.forward * ringDistance * i + offset;
+        Vector3 pos = Vector3.forward * ringDistance * i + offset;
+        // r.transform.position  = pos;
+        r.GetComponent<RingController>().Go(pos);
     }
 }

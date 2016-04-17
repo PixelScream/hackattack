@@ -102,6 +102,7 @@ public class InputManager : MonoBehaviour {
                 else
                 {
                     print("breath fail");
+                    currentRing.localScale = Vector3.zero;
                 }
 
                 ResetBreath();
