@@ -30,4 +30,6 @@ public class RingController : MonoBehaviour {
 
         //Destroy(this.gameObject);
     }
+
+   
 }

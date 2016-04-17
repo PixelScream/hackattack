@@ -50,6 +50,7 @@ public class LevelController : MonoBehaviour {
             {
                 rings[i] = Instantiate(ring, Vector3.zero, Quaternion.identity) as GameObject;
                 rings[i].transform.parent = this.transform;
+                rings[i].tag = "Ring";
             }
         }
 
