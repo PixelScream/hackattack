@@ -399,10 +399,55 @@ MonoBehaviour:
   minBlow: 0.5
   minSuck: -0.5
   blowDuration: 2
-  restDuration: 2
+  holdDuration: 0
   suckDuration: 2
+  green: {r: 0.41890964, g: 0.9044118, b: 0.37905493, a: 0}
+  sliderGradient:
+    key0:
+      serializedVersion: 2
+      rgba: 4283129522
+    key1:
+      serializedVersion: 2
+      rgba: 4280519374
+    key2:
+      serializedVersion: 2
+      rgba: 6350442
+    key3:
+      serializedVersion: 2
+      rgba: 12248672
+    key4:
+      serializedVersion: 2
+      rgba: 0
+    key5:
+      serializedVersion: 2
+      rgba: 0
+    key6:
+      serializedVersion: 2
+      rgba: 0
+    key7:
+      serializedVersion: 2
+      rgba: 0
+    ctime0: 0
+    ctime1: 16577
+    ctime2: 56283
+    ctime3: 65535
+    ctime4: 0
+    ctime5: 0
+    ctime6: 0
+    ctime7: 0
+    atime0: 0
+    atime1: 65535
+    atime2: 0
+    atime3: 0
+    atime4: 0
+    atime5: 0
+    atime6: 0
+    atime7: 0
+    m_NumColorKeys: 4
+    m_NumAlphaKeys: 2
+  sliderFill: {fileID: 11483300}
   breathsOut: []
-  breathsIn: []
+  levelController: {fileID: 0}
 --- !u!114 &11431166
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -715,7 +760,7 @@ MonoBehaviour:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 184616}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 708705254, guid: f5f67c52d1564df4a8936ccd202a3bd8, type: 3}
   m_Name: 

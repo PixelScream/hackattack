@@ -213,6 +213,12 @@ Prefab:
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: a4b5b6365c9defe458f2acb2598a34fd, type: 2}
   m_IsPrefabParent: 0
+--- !u!114 &427542352 stripped
+MonoBehaviour:
+  m_PrefabParentObject: {fileID: 11464204, guid: 21a333d1f0c3db549a0690db8a55954a,
+    type: 2}
+  m_PrefabInternal: {fileID: 1431855092}
+  m_Script: {fileID: 11500000, guid: 3091a70000e38c4448271d37269468b0, type: 3}
 --- !u!1 &751202215
 GameObject:
   m_ObjectHideFlags: 0
@@ -416,6 +422,10 @@ Prefab:
       propertyPath: m_RootOrder
       value: 3
       objectReference: {fileID: 0}
+    - target: {fileID: 11430658, guid: 45db8c6ef0c2d8a419c2f7d4c02396e7, type: 2}
+      propertyPath: levelController
+      value: 
+      objectReference: {fileID: 427542352}
     - target: {fileID: 22487046, guid: 45db8c6ef0c2d8a419c2f7d4c02396e7, type: 2}
       propertyPath: m_AnchorMax.y
       value: 0

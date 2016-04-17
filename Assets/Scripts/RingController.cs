@@ -4,7 +4,9 @@ using System.Collections;
 public class RingController : MonoBehaviour {
 
     public float spinTime, spinSpeed;
-
+    Vector3 startPos, endPos;
+    public float speed = 5;
+    bool go = false;
     /*
     void Start()
     {
@@ -31,5 +33,24 @@ public class RingController : MonoBehaviour {
         //Destroy(this.gameObject);
     }
 
-   
+    public void Go(Vector3 p)
+    {
+        endPos = p;
+        go = true;
+    }
+
+    void Update()
+    {
+        if (go)
+        {
+            transform.position = Vector3.Lerp(transform.position, endPos, Time.deltaTime * speed);
+
+            
+            if(Vector3.Distance(transform.position , endPos) < 1)
+            {
+                go = false;
+            }
+            
+        }
+    }
 }

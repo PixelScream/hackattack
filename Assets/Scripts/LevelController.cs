@@ -9,7 +9,7 @@ public class LevelController : MonoBehaviour {
     LevelInfo defaultLevelInfo;
     public float ringDistance = 5;
     public float levelWidth, levelHeight;
-    GameObject[] rings;
+    public GameObject[] rings;
 
     public struct LevelInfo
     {
@@ -25,8 +25,8 @@ public class LevelController : MonoBehaviour {
         {
             defaultLevelInfo.ringSize[i] = Mathf.Max ( Random.value, 0.3f);
         }
-
-        BuildLevel(defaultLevelInfo);
+        GenerateRings(defaultLevelInfo.ringCount);
+        //BuildLevel(defaultLevelInfo);
 	}
 
     void Update()
@@ -42,25 +42,39 @@ public class LevelController : MonoBehaviour {
     public void BuildLevel(LevelInfo l)
     {
         // check for rings being in existance
-        if(rings == null)
-        {
-            Debug.Log("Making Rings");
-            rings = new GameObject[l.ringCount];
-            for (int i = 0; i < l.ringCount; i++)
-            {
-                rings[i] = Instantiate(ring, Vector3.zero, Quaternion.identity) as GameObject;
-                rings[i].transform.parent = this.transform;
-                rings[i].tag = "Ring";
-            }
-        }
+
 
         Debug.Log("Placing Rings");
         for (int i = 0; i < l.ringCount; i++)
         {
+            print(i);
             Vector3 offset = new Vector3(Random.value * levelWidth, Random.value * levelHeight,15);
             rings[i].transform.position = Vector3.forward * ringDistance * i + offset;
             rings[i].transform.localScale = Vector3.one * l.ringSize[i];
 
         }
+    }
+
+    public void GenerateRings(int count)
+    {
+
+        Debug.Log("Making Rings");
+        rings = new GameObject[count];
+        for (int i = 0; i < count; i++)
+        {
+            rings[i] = Instantiate(ring, Vector3.forward * -10, Quaternion.identity) as GameObject;
+            rings[i].transform.parent = this.transform;
+            rings[i].tag = "Ring";
+        }
+        
+    }
+
+    public void PlaceRing(GameObject r, int i)
+    {
+        print(i);
+        Vector3 offset = new Vector3(Random.value * levelWidth, Random.value * levelHeight, 15);
+        Vector3 pos = Vector3.forward * ringDistance * i + offset;
+        // r.transform.position  = pos;
+        r.GetComponent<RingController>().Go(pos);
     }
 }
