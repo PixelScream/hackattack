@@ -10,10 +10,15 @@ public class Movement : MonoBehaviour {
     public float windSpeed = 0f;
     private float forwardSpeed = 4f;
     public float levelWidth, levelHeight;
-    
+    public GameObject plane;
+    public Sprite plane_forward;
+    //public Sprite plane_left;
+    //public Sprite plane_right;
+    public Sprite plane_down;
+    public Sprite plane_up;
 
     public Canvas openScreen;
-
+    public Camera cameraview;
     public Text play;
     public Text scoreText;
     public float score=0f;
@@ -60,8 +65,28 @@ public class Movement : MonoBehaviour {
                 transform.rotation = Quaternion.Euler(transform.rotation.eulerAngles.x, transform.rotation.eulerAngles.y + (airInput.y * moveAccel / 10), 0);
             }
             //Move Player
-            transform.position = transform.position + Camera.main.transform.forward * forwardSpeed * Time.deltaTime;
+            transform.position = transform.position + transform.forward * forwardSpeed * Time.deltaTime;
+            Vector3 offsetcamera = new Vector3(0,3,-8);
+            Vector3 offsetplane = new Vector3(0, 0, -1);
+           // cameraview.transform.position = transform.position + offsetcamera;
+           // plane.transform.position = transform.position+ offsetplane;
             
+            if (airInput.x == 0)
+            {
+                // plane.GetComponent(Sprite)
+                //plane.GetComponent(SpriteRenderer).sprite = spriteImage;
+                //plane.renderer.
+                plane.GetComponent<SpriteRenderer>().sprite = plane_forward;
+                
+            }else if (airInput.x<0)
+            {
+                plane.GetComponent<SpriteRenderer>().sprite = plane_up;
+            }
+            else
+            {
+                plane.GetComponent<SpriteRenderer>().sprite = plane_down;
+            }
+
             //If acheive target score end game.
             if (score == targetScore)
             {

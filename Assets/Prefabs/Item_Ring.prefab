@@ -9,7 +9,7 @@ GameObject:
   m_Component:
   - 4: {fileID: 492264}
   - 114: {fileID: 11468990}
-  - 65: {fileID: 6561804}
+  - 135: {fileID: 13502534}
   m_Layer: 0
   m_Name: Item_Ring
   m_TagString: Untagged
@@ -58,18 +58,6 @@ Transform:
   - {fileID: 487450}
   m_Father: {fileID: 0}
   m_RootOrder: 0
---- !u!65 &6561804
-BoxCollider:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 103604}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 1
-  m_Enabled: 1
-  serializedVersion: 2
-  m_Size: {x: 10, y: 10, z: 10}
-  m_Center: {x: 0, y: 0, z: 0}
 --- !u!114 &11468990
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -83,6 +71,18 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   spinTime: 2
   spinSpeed: 1000
+--- !u!135 &13502534
+SphereCollider:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 103604}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Radius: 2.78
+  m_Center: {x: 0, y: 0, z: -1.28}
 --- !u!212 &21256590
 SpriteRenderer:
   m_ObjectHideFlags: 1
