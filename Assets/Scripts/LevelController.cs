@@ -11,6 +11,9 @@ public class LevelController : MonoBehaviour {
     public float levelWidth, levelHeight;
     public GameObject[] rings;
 
+    public ParticleSystem particles;
+    public Canvas youwin;
+
     public struct LevelInfo
     {
         public int ringCount;
@@ -18,7 +21,8 @@ public class LevelController : MonoBehaviour {
     }
 
 	void Start () {
-
+        particles.Pause();
+        youwin.enabled = false;
         defaultLevelInfo.ringCount = 10;
         defaultLevelInfo.ringSize = new float[10] ;
         for(int i = 0; i < defaultLevelInfo.ringCount; i++)
@@ -33,7 +37,7 @@ public class LevelController : MonoBehaviour {
     {
         if (Input.GetMouseButtonDown(0))
         {
-            BuildLevel(defaultLevelInfo);
+          //  BuildLevel(defaultLevelInfo);
         }
 
 

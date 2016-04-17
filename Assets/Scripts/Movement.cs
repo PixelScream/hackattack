@@ -40,7 +40,7 @@ public class Movement : MonoBehaviour {
         started = true;
         score = 0;
         openScreen.enabled = false;
-        transform.position = new Vector3(0, 5, 0);
+        transform.position = new Vector3(0, 0, -10);
         transform.eulerAngles = new Vector3(0, 0, 0);
         scoreText.text = "Score: " + score.ToString() + "/3";
         end = false;
@@ -48,7 +48,7 @@ public class Movement : MonoBehaviour {
 
     // Use this for initialization
     void Start () {  
-        transform.position = new Vector3(0, 5, 0);
+        transform.position = new Vector3(0, 0, -10);
         transform.eulerAngles = new Vector3(0, 0, 0);
         scoreText.text = "";
         winScreen.enabled = false;
