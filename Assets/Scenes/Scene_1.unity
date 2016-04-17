@@ -376,6 +376,7 @@ MonoBehaviour:
   play: {fileID: 0}
   scoreText: {fileID: 1970023517}
   score: 0
+  started: 0
 --- !u!1 &484439253
 GameObject:
   m_ObjectHideFlags: 0
@@ -2946,7 +2947,7 @@ MonoBehaviour:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1413303928}
-  m_Enabled: 0
+  m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 74614b20b08ad6f478ea725522986401, type: 3}
   m_Name: 
@@ -2967,6 +2968,7 @@ MonoBehaviour:
   play: {fileID: 0}
   scoreText: {fileID: 1970023517}
   score: 0
+  started: 0
 --- !u!1 &1446375527
 GameObject:
   m_ObjectHideFlags: 0

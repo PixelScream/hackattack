@@ -15,6 +15,7 @@ public class InputManager : MonoBehaviour {
     // make the sliders colour on a gradient
     public Gradient sliderGradient;
     public Image sliderFill;
+    
 
     int ringCount = 10;
     public float[] breathsOut;
@@ -44,6 +45,10 @@ public class InputManager : MonoBehaviour {
 
         if(breathCount == ringCount)
         {
+            GameObject.Find("Player").GetComponent<Movement>().started = true;
+           
+
+            transform.GetComponentInChildren<Canvas>().enabled = false;
             return;
 
         }

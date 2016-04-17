@@ -31,16 +31,16 @@ public class Movement : MonoBehaviour {
     private float yRotateMax=60f;
     private float yRotateMin=300f;
     private int targetScore = 3;
-    private bool started = false;
+    public bool started = false;
     private bool end = false;
 
     //Sets Game up at start
     public void GameStart()
     {
-        started = true;
+        
         score = 0;
         openScreen.enabled = false;
-        transform.position = new Vector3(0, 0, -10);
+        transform.position = new Vector3(0, 0, -5);
         transform.eulerAngles = new Vector3(0, 0, 0);
         scoreText.text = "Score: " + score.ToString() + "/3";
         end = false;
@@ -48,7 +48,7 @@ public class Movement : MonoBehaviour {
 
     // Use this for initialization
     void Start () {  
-        transform.position = new Vector3(0, 0, -10);
+        transform.position = new Vector3(0, 0, -5);
         transform.eulerAngles = new Vector3(0, 0, 0);
         scoreText.text = "";
         winScreen.enabled = false;
