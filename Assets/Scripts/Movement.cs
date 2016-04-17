@@ -16,9 +16,11 @@ public class Movement : MonoBehaviour {
     //public Sprite plane_right;
     public Sprite plane_down;
     public Sprite plane_up;
+    public ParticleSystem particles;
 
     public Canvas openScreen;
     public Camera cameraview;
+    public Canvas winScreen;
     public Text play;
     public Text scoreText;
     public float score=0f;
@@ -30,6 +32,7 @@ public class Movement : MonoBehaviour {
     private float yRotateMin=300f;
     private int targetScore = 3;
     private bool started = false;
+    private bool end = false;
 
     //Sets Game up at start
     public void GameStart()
@@ -39,7 +42,8 @@ public class Movement : MonoBehaviour {
         openScreen.enabled = false;
         transform.position = new Vector3(0, 5, 0);
         transform.eulerAngles = new Vector3(0, 0, 0);
-        scoreText.text = "Score: " + score.ToString();
+        scoreText.text = "Score: " + score.ToString() + "/3";
+        end = false;
     }
 
     // Use this for initialization
@@ -47,10 +51,16 @@ public class Movement : MonoBehaviour {
         transform.position = new Vector3(0, 5, 0);
         transform.eulerAngles = new Vector3(0, 0, 0);
         scoreText.text = "";
+        winScreen.enabled = false;
+        particles.Pause();
 	}
 	
 	// Update is called once per frame
 	void Update () {
+        if (end)
+        {
+            openScreen.enabled = true;
+        }
         if (started)
         {
             airInput = new Vector3(Input.GetAxis("Vertical"), Input.GetAxis("Horizontal"), 0);
@@ -68,7 +78,7 @@ public class Movement : MonoBehaviour {
             transform.position = transform.position + transform.forward * forwardSpeed * Time.deltaTime;
             Vector3 offsetcamera = new Vector3(0,3,-8);
             Vector3 offsetplane = new Vector3(0, 0, -1);
-           // cameraview.transform.position = transform.position + offsetcamera;
+           // cameraview.transform.rotation = new Vector3(transform.rotation.x;
            // plane.transform.position = transform.position+ offsetplane;
             
             if (airInput.x == 0)
@@ -90,17 +100,25 @@ public class Movement : MonoBehaviour {
             //If acheive target score end game.
             if (score == targetScore)
             {
-                GameEnd();
+                StartCoroutine(GameEnd());
+                
             }
         }
 
 
     }
     //Ends game
-    void GameEnd()
+    IEnumerator GameEnd()
     {
-        play.text = "Play Again?";
-        openScreen.enabled = true;
+        winScreen.enabled = true;
+        
+        particles.Play();
+        yield return new WaitForSeconds(5);
+        started = false;
+        particles.Stop();
+        end = true;
+        winScreen.enabled = false;
+
     }
     //When player collides with ring
     void OnTriggerEnter(Collider ring)
@@ -119,8 +137,8 @@ public class Movement : MonoBehaviour {
         {
             Debug.Log("Collide");
             score += 1;
-            //ring.GetComponentInChildren<Renderer>().material.color = Color.cyan;
-            scoreText.text = "Score: " + score.ToString();
+            ring.GetComponentInChildren<Renderer>().material.color = Color.cyan;
+            scoreText.text = "Score: " + score.ToString() + "/3";
         }
     }
     
