@@ -6,7 +6,7 @@ InputManager:
   serializedVersion: 2
   m_Axes:
   - serializedVersion: 3
-    m_Name: Hori
+    m_Name: Horizontal
     descriptiveName: 
     descriptiveNegativeName: 
     negativeButton: left
@@ -20,7 +20,7 @@ InputManager:
     invert: 0
     type: 0
     axis: 0
-    joyNum: 2
+    joyNum: 0
   - serializedVersion: 3
     m_Name: Vertical
     descriptiveName: 
@@ -37,7 +37,6 @@ InputManager:
     type: 0
     axis: 0
     joyNum: 0
-<<<<<<< HEAD
   - serializedVersion: 3
     m_Name: Fire1
     descriptiveName: 
@@ -165,7 +164,7 @@ InputManager:
     invert: 0
     type: 2
     axis: 0
-    joyNum: 1
+    joyNum: 0
   - serializedVersion: 3
     m_Name: Vertical
     descriptiveName: 
@@ -294,5 +293,3 @@ InputManager:
     type: 0
     axis: 0
     joyNum: 0
-=======
->>>>>>> 78b52d6048a9bdf0274c694fe8fcf702ea29adf7
