@@ -13,7 +13,8 @@ public class InputManager : MonoBehaviour {
     public Color green;
 
     // make the sliders colour on a gradient
-    // public Gradient sliderGradient;
+    public Gradient sliderGradient;
+    public Image sliderFill;
 
     int ringCount = 10;
     public float[] breathsOut;
@@ -22,145 +23,106 @@ public class InputManager : MonoBehaviour {
 
     float score = 0;
 
+    float breathSoFar;
+    float currentBreath;
+
+    int counter;
+
+    float noise = 0.05f;
+    bool simulateNoise = true;
+    Transform currentRing;
+
+    public LevelController levelController;
+
     void Start()
     {
-        LevelStart();
+
+        ResetBreath();
     }
 
 	void Update () {
 
+        if(breathCount == ringCount)
+        {
+            return;
 
+        }
         //  Get the blow force
-        float h = PollHorzontal();
+        float h = PollHoizontal();
         // Get button state
         bool b = Input.GetButtonDown("Fire1");
 
 
         // blow start
-        if(!blowing && h < minSuck)
+        //if(!blowing && h < minSuck)
+        if (!blowing && h > minBlow)
         {
             blowing = true;
             blowStart = Time.time;
-            StartCoroutine(Blowing(h));
-
+            currentRing = levelController.rings[breathCount].transform;
+            currentRing.position = Vector3.zero;
+            currentRing.localPosition = Vector3.zero;
         }
 
-       // Debug.Log(h);
-
-        if (Input.GetButtonDown("Fire1"))
+        if(h > 0.1)
         {
-            print("YAY");
+            if (simulateNoise)
+                powerSlider.value = h + (noise * Random.value);
+            else
+                powerSlider.value = h;
+
+           
         }
-    }
-
-    IEnumerator Blowing(float changeme)
-    {
-        // counter
-        int c = 0;
-        float v = changeme;
-        float b = 0;
-        float timeLeft;
-
-        holdText.enabled = true;
-        holdText.text = "Inhale";
-        // handle Suck
-
-        while (v < minSuck)
+        else
         {
-            v = Input.GetAxisRaw("Horizontal");
-            powerSlider.value = -v;
-
-            timeLeft = 1 - (Time.time - blowStart) / holdDuration;
-            timeSlider.value = timeLeft;
-
-            yield return pollRate;
+            powerSlider.value = 0;
         }
 
-        float suckedFor = Time.time - blowStart;
-        if(suckedFor <  suckDuration)
+        sliderFill.color = sliderGradient.Evaluate(h);
+
+        // handle blowing
+        if (blowing)
         {
-            print("suck failed");
-            yield return null;
-        }
-
-        // handle Hold
-
-        holdText.text = "Hold!";
-
-        float heldFor = Time.time - blowStart - suckedFor;
-        while (heldFor < holdDuration )
-        {
-            heldFor = Time.time - blowStart - suckedFor;
-            timeLeft = 1 - heldFor/ holdDuration;
-            timeSlider.value = timeLeft;
-            v = Input.GetAxisRaw("Horizontal");
-
-            if(v > minBlow)
+            float breathComplete = (Time.time - blowStart) / blowDuration;
+            timeSlider.value = breathComplete;
+            if(h > minBlow)
             {
-                print("rest failed");
-                yield return null;
+                breathSoFar += h ;
+                counter++;
+                currentRing.localScale = (Vector3.one * ( breathSoFar / counter)) * Mathf.Min( breathComplete, 1.3f);
+            } 
+            else
+            {
+                if(Time.time > blowStart + blowDuration)
+                {
+                    print("breath successful");
+                    breathCount++;
+                    levelController.PlaceRing(currentRing.gameObject, breathCount);
+                } 
+                else
+                {
+                    print("breath fail");
+                }
+
+                ResetBreath();
             }
-
-            
-            yield return pollRate;
-            
         }
+    }
 
-        holdText.text = "Blow";
-        while (v < minBlow)
-        {
-            v = Input.GetAxisRaw("Horizontal");
-            yield return pollRate;
-        }
-       
+    float PollHoizontal()
+    {
+        return Input.GetAxisRaw("Horizontal");
+    }
 
-        // handle Blowing
-        c = 0;
-        while (v > minBlow)
-        {
-            c++;
-            v = 
-            b += v;
-            powerSlider.value = v;
-            timeLeft = 1 - (Time.time - blowStart - heldFor - suckedFor) / blowDuration;
-            timeSlider.value = timeLeft;
-            yield return pollRate;
-        }
-
-        if (Time.time > blowStart + (blowDuration * 0.75f))
-        {
-            print("Successful breath!");
-
-            breathsOut[breathCount] = b / c;
-            float blowDelta = Mathf.Min((blowStart + blowDuration - Time.time) / blowDuration, 1.5f);
-            score += 5 * blowDelta;
-            breathCount++;
-        }
-        
-        if(breathCount == ringCount)
-        {
-            Debug.Log("End Breathing Phase");
-        }
-
-        powerSlider.value = 0;
+    void ResetBreath()
+    {
         blowing = false;
+        holdText.color = Color.white;
         holdText.enabled = false;
-
-    }
-
-
-
-    void LevelStart()
-    {
-        breathsOut = new float[ringCount];
-        
-        breathCount = 0;
-    }
-
-    float PollHorzontal()
-    {
-        float f = Input.GetAxisRaw("Horizontal");
-        powerSlider.value = f;
-        return f;
+        counter = 0;
+        breathSoFar = 0;
+        powerSlider.value = timeSlider.value = 0;
+        holdText.text = "Blow!";
+        holdText.enabled = true;
     }
 }
