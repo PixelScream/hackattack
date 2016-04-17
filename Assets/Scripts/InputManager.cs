@@ -5,10 +5,11 @@ using UnityEngine.UI;
 public class InputManager : MonoBehaviour {
 
     public Slider powerSlider, timeSlider;
+    public Text holdText;
     bool blowing;
     public float minBlow, minSuck;
     float blowStart;
-    public float blowDuration, restDuration, suckDuration;
+    public float blowDuration, holdDuration, suckDuration;
 
     // make the sliders colour on a gradient
     // public Gradient sliderGradient;
@@ -35,7 +36,7 @@ public class InputManager : MonoBehaviour {
 
 
         // blow start
-        if(!blowing && h > minBlow )
+        if(!blowing && h < minSuck)
         {
             blowing = true;
             blowStart = Time.time;
@@ -53,21 +54,74 @@ public class InputManager : MonoBehaviour {
 
     IEnumerator Blowing(float changeme)
     {
+        // counter
         int c = 0;
         float v = changeme;
         float b = 0;
-        float timeLeft = Time.time - (blowStart + blowDuration);
+        float timeLeft;
 
+        holdText.enabled = true;
+        holdText.text = "Inhale";
+        // handle Suck
 
+        while (v < minSuck)
+        {
+            v = Input.GetAxisRaw("Horizontal");
+            powerSlider.value = -v;
+
+            timeLeft = 1 - (Time.time - blowStart) / holdDuration;
+            timeSlider.value = timeLeft;
+
+            yield return pollRate;
+        }
+
+        float suckedFor = Time.time - blowStart;
+        if(suckedFor <  suckDuration)
+        {
+            print("suck failed");
+            yield return null;
+        }
+
+        // handle Hold
+
+        holdText.text = "Hold!";
+
+        float heldFor = Time.time - blowStart - suckedFor;
+        while (heldFor < holdDuration )
+        {
+            heldFor = Time.time - blowStart - suckedFor;
+            timeLeft = 1 - heldFor/ holdDuration;
+            timeSlider.value = timeLeft;
+            v = Input.GetAxisRaw("Horizontal");
+
+            if(v > minBlow)
+            {
+                print("rest failed");
+                yield return null;
+            }
+
+            
+            yield return pollRate;
+            
+        }
+
+        holdText.text = "Blow";
+        while (v < minBlow)
+        {
+            v = Input.GetAxisRaw("Horizontal");
+            yield return pollRate;
+        }
+       
 
         // handle Blowing
+        c = 0;
         while (v > minBlow)
         {
             c++;
-            v = Input.GetAxisRaw("Horizontal");
+            v = 
             b += v;
             powerSlider.value = v;
-            timeLeft = 1 - (Time.time - blowStart) / blowDuration;
+            timeLeft = 1 - (Time.time - blowStart - heldFor - suckedFor) / blowDuration;
             timeSlider.value = timeLeft;
             yield return pollRate;
         }
@@ -89,7 +143,8 @@ public class InputManager : MonoBehaviour {
 
         powerSlider.value = 0;
         blowing = false;
-        
+        holdText.enabled = false;
+
     }
 
 
@@ -99,5 +154,12 @@ public class InputManager : MonoBehaviour {
         breathsOut = new float[ringCount];
         breathsIn = new float[ringCount];
         breathCount = 0;
+    }
+
+    float PollHorzontal()
+    {
+        float f = Input.GetAxisRaw("Horizontal");
+        powerSlider.value = f;
+        return f;
     }
 }
