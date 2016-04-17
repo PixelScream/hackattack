@@ -418,11 +418,27 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 22487046, guid: 45db8c6ef0c2d8a419c2f7d4c02396e7, type: 2}
       propertyPath: m_AnchorMax.y
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 22443740, guid: 45db8c6ef0c2d8a419c2f7d4c02396e7, type: 2}
       propertyPath: m_AnchorMax.y
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 11491446, guid: 45db8c6ef0c2d8a419c2f7d4c02396e7, type: 2}
+      propertyPath: m_Enabled
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 11430658, guid: 45db8c6ef0c2d8a419c2f7d4c02396e7, type: 2}
+      propertyPath: green.r
+      value: 0.41890964
+      objectReference: {fileID: 0}
+    - target: {fileID: 11430658, guid: 45db8c6ef0c2d8a419c2f7d4c02396e7, type: 2}
+      propertyPath: green.g
+      value: 0.9044118
+      objectReference: {fileID: 0}
+    - target: {fileID: 11430658, guid: 45db8c6ef0c2d8a419c2f7d4c02396e7, type: 2}
+      propertyPath: green.b
+      value: 0.37905493
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 45db8c6ef0c2d8a419c2f7d4c02396e7, type: 2}

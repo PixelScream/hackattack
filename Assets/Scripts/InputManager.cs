@@ -10,12 +10,13 @@ public class InputManager : MonoBehaviour {
     public float minBlow, minSuck;
     float blowStart;
     public float blowDuration, holdDuration, suckDuration;
+    public Color green;
 
     // make the sliders colour on a gradient
     // public Gradient sliderGradient;
 
     int ringCount = 10;
-    public float[] breathsOut, breathsIn;
+    public float[] breathsOut;
     int breathCount;
     float pollRate = 30;
 
@@ -30,7 +31,7 @@ public class InputManager : MonoBehaviour {
 
 
         //  Get the blow force
-        float h = Input.GetAxisRaw("Horizontal");
+        float h = PollHorzontal();
         // Get button state
         bool b = Input.GetButtonDown("Fire1");
 
@@ -152,7 +153,7 @@ public class InputManager : MonoBehaviour {
     void LevelStart()
     {
         breathsOut = new float[ringCount];
-        breathsIn = new float[ringCount];
+        
         breathCount = 0;
     }
 
