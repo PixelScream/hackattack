@@ -56,7 +56,7 @@ public class LevelController : MonoBehaviour {
         Debug.Log("Placing Rings");
         for (int i = 0; i < l.ringCount; i++)
         {
-            Vector3 offset = new Vector3(Random.value * levelWidth, Random.value * levelHeight);
+            Vector3 offset = new Vector3(Random.value * levelWidth, Random.value * levelHeight,15);
             rings[i].transform.position = Vector3.forward * ringDistance * i + offset;
             rings[i].transform.localScale = Vector3.one * l.ringSize[i];
 
