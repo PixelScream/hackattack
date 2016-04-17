@@ -89,6 +89,7 @@ public class Movement : MonoBehaviour {
         //ring.bounds.Contains(transform.position)
 
         //if the player is inside the ring
+        //if (ring.bounds.Contains(transform.position)) { 
         if (ring.CompareTag("Ring") && diffX > 0.3 && diffY > 0.3)
         {
             Debug.Log("Collide");
@@ -100,6 +101,15 @@ public class Movement : MonoBehaviour {
     
 }
 /*
+ * 
+ * 
+ * 
+ * 0,0,-1.28
+ * 2.78
+ * 1,1,1
+ * sphere collider
+ * istrigger
+ * none(physical material)
 
 //
 */
