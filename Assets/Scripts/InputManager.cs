@@ -6,13 +6,15 @@ public class InputManager : MonoBehaviour {
 
     public Slider powerSlider, timeSlider;
     bool blowing;
-    public float minBlow = 0.5f;
+    public float minBlow, minSuck;
     float blowStart;
-    public float blowDuration = 5;
+    public float blowDuration, restDuration, suckDuration;
 
+    // make the sliders colour on a gradient
+    // public Gradient sliderGradient;
 
     int ringCount = 10;
-    public float[] breaths;
+    public float[] breathsOut, breathsIn;
     int breathCount;
     float pollRate = 30;
 
@@ -25,6 +27,7 @@ public class InputManager : MonoBehaviour {
 
 	void Update () {
 
+
         //  Get the blow force
         float h = Input.GetAxisRaw("Horizontal");
         // Get button state
@@ -35,16 +38,10 @@ public class InputManager : MonoBehaviour {
         if(!blowing && h > minBlow )
         {
             blowing = true;
-            blowStart = Time.time; 
-        }
-
-        if (blowing)
-        {
+            blowStart = Time.time;
             StartCoroutine(Blowing(h));
-            
-        }
 
-        
+        }
 
        // Debug.Log(h);
 
@@ -60,6 +57,10 @@ public class InputManager : MonoBehaviour {
         float v = changeme;
         float b = 0;
         float timeLeft = Time.time - (blowStart + blowDuration);
+
+
+
+        // handle Blowing
         while (v > minBlow)
         {
             c++;
@@ -71,31 +72,32 @@ public class InputManager : MonoBehaviour {
             yield return pollRate;
         }
 
-        SetBreath(ref breathCount, b);
+        if (Time.time > blowStart + (blowDuration * 0.75f))
+        {
+            print("Successful breath!");
 
-
+            breathsOut[breathCount] = b / c;
+            float blowDelta = Mathf.Min((blowStart + blowDuration - Time.time) / blowDuration, 1.5f);
+            score += 5 * blowDelta;
+            breathCount++;
+        }
+        
+        if(breathCount == ringCount)
+        {
+            Debug.Log("End Breathing Phase");
+        }
 
         powerSlider.value = 0;
         blowing = false;
         
     }
 
-    void SetBreath(ref int breathCount, float b)
-    {
-        if (Time.time > blowStart + (blowDuration * 0.75f) )
-        {
-            print("Successful breath!");
 
-            breaths[breathCount] = b;
-            float blowDelta = Mathf.Min((blowStart + blowDuration - Time.time) / blowDuration, 1.5f);
-            score += 5 * blowDelta;
-            breathCount++;
-        }
-    }
 
     void LevelStart()
     {
-        breaths = new float[ringCount];
+        breathsOut = new float[ringCount];
+        breathsIn = new float[ringCount];
         breathCount = 0;
     }
 }
