@@ -4,6 +4,7 @@ using System.Collections;
 public class LevelController : MonoBehaviour {
 
     public GameObject ring;
+
     [Header("Level Variables")]
     LevelInfo defaultLevelInfo;
     public float ringDistance = 5;
